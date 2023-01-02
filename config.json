@@ -1,0 +1,11 @@
+{
+    "_session_age_notes":"this is in seconds",
+    "default_session_age":345600,
+    "secure_cookie":false,
+    "httponly": true,
+    "trust_proxy":1,
+    "cookie_name":"sgss",
+    "cookie_secret":"grand canyon is the best destination every rukbat subar kapaa na keiki",
+    "ip_address":false,
+    "port": 8010
+}
