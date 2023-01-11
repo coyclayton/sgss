@@ -4,9 +4,36 @@ const fs = require('fs');
 const crypto = require('crypto');
 
 var gridState = require('./jrftw/gridState.json');
+var lastUpdate = 0;
+
+function updateLastUpdate() {
+    var updateTime = 0;
+    gridState.grid.forEach((e)=>{
+        if (e.unlock_time > updateTime) {
+            updateTime = e.unlock_time;
+        }
+    });
+    lastUpdate = updateTime;
+}
+
+router.get('/get_time', function(req, res) {
+    res.json({
+        lastUpdate: lastUpdate
+    });
+});
 
 router.get('/image_grid', function(req, res) {
-    res.json(gridState.grid);
+    if (req.query.fromTime == undefined) {
+        res.json(gridState.grid);
+    } else {
+        var gridBlocks = [];
+        gridState.grid.map((e)=>{
+            if (e.unlock_time > parseInt(req.query.fromTime,10)) {
+                gridBlocks.push(e);
+            }
+        });
+        res.json(gridBlocks);
+    }
 });
 
 function sendFail(res, message) {
@@ -34,7 +61,9 @@ router.get('/flip_square', function(req, res){
             if (targetSquare !== -1) {
                 gridState.grid[targetSquare].unlocked = true;
                 gridState.grid[targetSquare].unlock_at = req.query.at;
+                gridState.grid[targetSquare].unlock_time = Date.now();
                 gridState.hash = crypto.createHash('md5').update(JSON.stringify(gridState.grid)).digest('hex');
+                updateLastUpdate();
                 fs.writeFileSync(__dirname+"/jrftw/gridState.json", JSON.stringify(gridState, null, 4));
                 res.json({
                     success:1
