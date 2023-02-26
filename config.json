@@ -1,11 +1,16 @@
 {
     "_session_age_notes":"this is in seconds",
     "default_session_age":345600,
-    "secure_cookie":false,
-    "httponly": true,
+    "secure_cookie":true,
+    "httponly": false,
     "trust_proxy":1,
     "cookie_name":"sgss",
     "cookie_secret":"grand canyon is the best destination every rukbat subar kapaa na keiki",
-    "ip_address":false,
-    "port": 8010
+    "ip_address":"127.0.0.1",
+    "port": 8010,
+    "allow_origins":[
+        "http://vm.local:3000",
+        "https://jrftw.pointaldebaran.com",
+        "https://localhost"
+    ]
 }

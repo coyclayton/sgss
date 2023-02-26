@@ -43,10 +43,40 @@ function sendFail(res, message) {
     });
 }
 
+router.get('/authorize', function(req,res){
+    if (req.query.password == "wshhhwshhhwshhhwshhhwshhh") {
+        req.session.authorized = true;
+        res.json({
+            success: 1,
+            message: "Success!"
+        });
+    } else {
+        req.session.authorized = false;
+        res.json({
+            success: 0,
+            message: "NOPE!"
+        });
+    }
+});
+
+router.get('/is_authorized', function(req,res){
+    if (req.session.authorized === true) {
+        res.json({
+            success: 1,
+            message: "Yep!"
+        });
+    } else {
+        res.json({
+            success: 0,
+            message: "NOPE!"
+        });
+
+    }
+});
+
 router.get('/flip_square', function(req, res){
-    var password="wshhhwshhhwshhhwshhhwshhh";
     //console.log(req.query);
-    if (req.query.password === password) {
+    if (req.session.authorized === true) {
         var squareID = parseInt(req.query.square, 10);
         if (squareID == 0 || squareID > 328) {
             return sendFail("out of bounds");

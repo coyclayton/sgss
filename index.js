@@ -5,10 +5,12 @@ const exp_session = require('express-session');
 const exp_san = require('express-sanitizer');
 const exp_cors = require('cors');
 const genuuid = require('uuid');
+var sessionStore = new exp_session.MemoryStore();    
 
 // load and prep sub-routers:
 
 const configGlobal = require('./config.json');
+const { config } = require('process');
 
 var submods = {};
 submods.jrftw = require('./games/jrftw.js');
@@ -16,11 +18,6 @@ submods.jrftw = require('./games/jrftw.js');
 // submods.upm = require('./routes/upm.js');
 
     runService();    
-    //======== Nexus Data Config Injection.
-    function injectNexus(req, res, next) {
-        req.nexusConfig = configGlobal.nexus;
-        next();
-    }
 
     // this is the primary execution loop of our service.
     function runService() {
@@ -31,12 +28,18 @@ submods.jrftw = require('./games/jrftw.js');
         app.use(exp_bodyParser.json()); // for parsing application/json
         app.use(exp_compression());
         app.use(exp_san());
-        app.use(exp_cors());
+        app.use(exp_cors({
+            exposedHeaders: ["set-cookie"],
+            origin: configGlobal['allow_origins'],
+            credentials: true
+        }));
         app.use(exp_session({
+            store: sessionStore,
             cookie: {
                 httpOnly: configGlobal["httponly"],
                 secure: configGlobal["secure_cookie"],
                 maxAge: configGlobal['default_session_age'] * 1000,
+                sameSite: "none"
             },
             secret: configGlobal['cookie_secret'],
             saveUninitialized: true,
@@ -49,7 +52,7 @@ submods.jrftw = require('./games/jrftw.js');
 
         // legacy routes
 
-        app.use('/jrftw', submods.jrftw);
+        app.use('/api/jrftw', submods.jrftw);
 
         // startup stuff goes here
         var svrConfig = {};
@@ -86,6 +89,6 @@ submods.jrftw = require('./games/jrftw.js');
         if (configGlobal.ip_address == false) {
             console.log( "SGSS service is ready on all ips @ " + svrConfig.port.toString());
         } else {
-            console.log( "SGSS services is READY at " + svrConfig.host + ":" + svrConfig.toString());
+            console.log( "SGSS services is READY at " + svrConfig.host + ":" + svrConfig.port.toString());
         }         
     }// end of runService
