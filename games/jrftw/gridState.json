@@ -1915,7 +1915,7 @@
             "imgs": [
                 105
             ],
-            "unlocked": true,
+            "unlocked": false,
             "entity": false,
             "label": false,
             "unlock_at": "whoAREYou",
@@ -1934,7 +1934,7 @@
             "imgs": [
                 106
             ],
-            "unlocked": true,
+            "unlocked": false,
             "entity": false,
             "label": false,
             "unlock_at": "whoAREYou",
@@ -1953,7 +1953,7 @@
             "imgs": [
                 107
             ],
-            "unlocked": true,
+            "unlocked": false,
             "entity": false,
             "label": false,
             "unlock_at": "whoAREYou",
@@ -1972,7 +1972,7 @@
             "imgs": [
                 108
             ],
-            "unlocked": true,
+            "unlocked": false,
             "entity": false,
             "label": false,
             "unlock_at": "whoAREYou",
@@ -1992,7 +1992,7 @@
                 109,
                 110
             ],
-            "unlocked": true,
+            "unlocked": false,
             "entity": false,
             "label": false,
             "unlock_at": "whoAREYou",
@@ -2012,7 +2012,7 @@
                 111,
                 112
             ],
-            "unlocked": true,
+            "unlocked": false,
             "entity": false,
             "label": false,
             "unlock_at": "whoAREYou",
@@ -2031,7 +2031,7 @@
             "imgs": [
                 113
             ],
-            "unlocked": true,
+            "unlocked": false,
             "entity": false,
             "label": false,
             "unlock_at": "whoAREYou",
@@ -4048,7 +4048,7 @@
             "imgs": [
                 276
             ],
-            "unlocked": true,
+            "unlocked": false,
             "entity": false,
             "label": false,
             "unlock_at": "whoAREYou",
@@ -4812,7 +4812,7 @@
             "imgs": [
                 320
             ],
-            "unlocked": true,
+            "unlocked": false,
             "entity": false,
             "label": false,
             "unlock_at": "whoAREYou",
