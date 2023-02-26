@@ -14,8 +14,6 @@ const { config } = require('process');
 
 var submods = {};
 submods.jrftw = require('./games/jrftw.js');
-// submods.nexus = require('./routes/nexus.js');
-// submods.upm = require('./routes/upm.js');
 
     runService();    
 
@@ -39,11 +37,11 @@ submods.jrftw = require('./games/jrftw.js');
                 httpOnly: configGlobal["httponly"],
                 secure: configGlobal["secure_cookie"],
                 maxAge: configGlobal['default_session_age'] * 1000,
-                sameSite: "Strict",
+                sameSite: "none",
                 domain: "pointaldebaran.com"
             },
             secret: configGlobal['cookie_secret'],
-            proxy:true,
+            proxy: true,
             saveUninitialized: true,
             resave: false,
             genid: function(req) {
