@@ -39,9 +39,11 @@ submods.jrftw = require('./games/jrftw.js');
                 httpOnly: configGlobal["httponly"],
                 secure: configGlobal["secure_cookie"],
                 maxAge: configGlobal['default_session_age'] * 1000,
-                sameSite: "none"
+                sameSite: "Strict",
+                domain: "pointaldebaran.com"
             },
             secret: configGlobal['cookie_secret'],
+            proxy:true,
             saveUninitialized: true,
             resave: false,
             genid: function(req) {
